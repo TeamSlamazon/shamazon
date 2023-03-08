@@ -83,7 +83,7 @@ export const fetchAllProducts = async () =>{
         }
 }
 
-export const fetchSingleView = async (token, name, price, description) =>{
+export const fetchSingleView = async (token, name, price, description, shipping, weight, picture) =>{
     try{
         const response = await fetch('/api/:id',{
             headers:{
@@ -94,6 +94,9 @@ export const fetchSingleView = async (token, name, price, description) =>{
                 name: name,
                 price: price,
                 description: description,
+                shipping: shipping,
+                weight: weight,
+                picture: picture,
         })
         })
         const result = await response.json();
