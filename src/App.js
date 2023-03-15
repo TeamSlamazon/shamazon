@@ -7,7 +7,6 @@ import { fetchProducts } from './fetch';
 import SingleProduct from './components/SingleProduct';
 import { getUser } from './fetch';
 import Cart from './components/Cart';
-import Logout from './components/Logout';
 
 
 
@@ -59,9 +58,9 @@ const App = () => {
           <Route path='/checkout' element= {Checkout}/>
           <Route path='/products/:id' element = {<SingleProduct products={products}/>} />
           <Route path='' element={<HomeBody />} />
-          <Route path='/Login' element={<Login />} />
-          <Route path='/Register' element={<Register setUser ={setUser}/>} />
-          <Route path='/Products' element={<Products products={products}/>} />
+          <Route path='/login' element={<Login />} />
+          <Route path='/register' element={<Register setUser ={setUser}/>} />
+          <Route path='/products' element={<Products products={products}/>} />
           <Route path='/cart' element={<Cart cart={cart}/>}/>
 
         </Routes>
