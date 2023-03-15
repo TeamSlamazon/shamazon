@@ -1,6 +1,6 @@
 const client = require('./client');
 const jwt = require('jsonwebtoken');
-const bcrypt = require('bcrypt')
+const bcrypt = require('bcryptjs')
 
 const getUserByUsername = async (username) => {
   try {
