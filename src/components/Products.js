@@ -6,7 +6,7 @@ import { fetchAddProductToCart } from "../fetch"
 const Products = (props) => {
     
     const products=props.products
-
+    const setCart=props.setCart
 
     return (
         <div>
@@ -30,6 +30,7 @@ const Products = (props) => {
                                 <button
                                     onClick={async () => {
                                         const updatedCart = await fetchAddProductToCart(product.id)
+                                        setCart(updatedCart)
                                         console.log('added to cart')
                                     }}
                                 >
