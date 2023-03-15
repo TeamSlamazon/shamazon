@@ -7,7 +7,6 @@ import { fetchProducts } from './fetch';
 import SingleProduct from './components/SingleProduct';
 import { getUser } from './fetch';
 import Cart from './components/Cart';
-import Logout from './components/Logout';
 
 
 
