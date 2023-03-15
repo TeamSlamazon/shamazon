@@ -17,9 +17,11 @@ const Products = (props) => {
                                 <div className="image">
                                     <li key={product.id}><img src={product.picture} alt="product_image" width='225px'height='275px'/></li>
                                 </div>
+
                                 <div className="info">
                                     <div className="info_sub1">
-                                        <li className='name' key={product.id}>{product.name}</li>
+                                        <li className='name' key={product.id}><Link to={`/products/${product.id}`}>{product.name}</Link></li>
+
                                         <li className='price' key={product.id}>${product.price}.00</li>
                                         <li className='shipping' key={product.id}>Shipping Details: {product.shipping}</li>
                                     </div>
