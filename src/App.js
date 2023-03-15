@@ -53,11 +53,12 @@ const App = () => {
 
         <Header cart={cart}/>
         <Routes>
+          
           <Route path='/products/:id' element = {<SingleProduct products={products}/>} />
           <Route path='' element={<HomeBody />} />
-          <Route path='/Login' element={<Login />} />
-          <Route path='/Register' element={<Register setUser ={setUser}/>} />
-          <Route path='/Products' element={<Products products={products}/>} />
+          <Route path='/login' element={<Login />} />
+          <Route path='/register' element={<Register setUser ={setUser}/>} />
+          <Route path='/products' element={<Products products={products}/>} />
           <Route path='/cart' element={<Cart cart={cart}/>}/>
 
         </Routes>
