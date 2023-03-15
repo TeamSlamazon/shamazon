@@ -23,7 +23,7 @@ return (
                 if(!res.error) {
                     window.localStorage.setItem('token', res);
                     const redirHome = () => {
-                        window.location.href ='/'
+                        window.location.href ='/#/'
                     }
                     redirHome();
                 }
