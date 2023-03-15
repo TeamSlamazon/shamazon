@@ -22,6 +22,10 @@ const sliceToken = (req) => {
     return userInfo;
 }
 
+const checkAdmin = (req, res, next) => {
+  
+}
+
 module.exports = {
   tokenAuth,
   sliceToken,

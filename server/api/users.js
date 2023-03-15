@@ -6,7 +6,7 @@ const jwt = require("jsonwebtoken");
 
 
 const { tokenAuth, sliceToken } = require("./utils");
-const { createUser, getUserByUsername, authenticate, getUserByToken } = require("../db/users");
+const { createUser, getUserByUsername, authenticate, getUserByToken, getAllUsers } = require("../db/users");
 const { createCart } = require("../db");
 
 
@@ -14,6 +14,15 @@ const { createCart } = require("../db");
 router.get('/health', async (req, res, next) => {
     res.send({ message: "Healthy Users Route." })
   });
+
+router.get('/', async (req, res) => {
+  try {
+    const users = await getAllUsers()
+    res.send(users)
+  } catch (error) {
+    throw error
+  }
+})
 
 router.post("/register", async (req, res, next) => {
     
