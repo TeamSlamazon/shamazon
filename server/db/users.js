@@ -2,7 +2,7 @@ const client = require('./client');
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcrypt')
 
-const getUserByUsername = async ({username}) => {
+const getUserByUsername = async (username) => {
   try {
     const { rows: [user]} = await client.query(`
     SELECT *

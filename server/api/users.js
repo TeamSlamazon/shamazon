@@ -102,7 +102,7 @@ router.get('/me', tokenAuth, async (req, res, next) => {
     try{
      const userInfo = sliceToken();
     console.log(userInfo)
-     const user = await getUserByToken(userInfo)
+     const user = await getUserByUsername(userInfo.username)
    
      if (user) { 
        res.send({
