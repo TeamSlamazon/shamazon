@@ -1,18 +1,17 @@
 
 import React, {useState, useEffect} from 'react';
-import { Login, Register, Products, Header, Footer } from './components/index'
+import { Login, Register, Products, Header, Footer, Logout, Checkout } from './components/index'
 import { Routes, Route, Link } from 'react-router-dom';
 import HomeBody from './components/HomeBody';
 import { fetchProducts } from './fetch';
 import SingleProduct from './components/SingleProduct';
 import { getUser } from './fetch';
-import Logout from './components/Logout';
+
 
 
 const App = () => {
   const [products, setProducts] = useState([]);
   let [user, setUser] = useState({});
-  const [cart, setCart] = useState({})
 
   const ueFetchProducts = async () => {
     setProducts(await fetchProducts())
@@ -36,14 +35,14 @@ const App = () => {
   }, [])
 
   console.log(products)
-
   return (
     <div>
       <>
-
+        
         <Logout />
         <Header />
         <Routes>
+          <Route path='/checkout' element= {Checkout}/>
           <Route path='/products/:id' element = {<SingleProduct products={products}/>} />
           <Route path='' element={<HomeBody />} />
           <Route path='/Login' element={<Login />} />
