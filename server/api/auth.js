@@ -10,7 +10,8 @@ module.exports = router;
 router.post('/', async(req, res, next)=> {
   try {
     const token = await authenticate(req.body);
-    res.send({ token });
+    const user = await getUserByToken(token)
+    res.send({ token, user });
   }
   catch(ex){
     next(ex);

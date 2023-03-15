@@ -51,16 +51,16 @@ const App = () => {
     <div>
       <>
         
-    { user.id ? <Logout /> : null }
+    { user.id ? <Logout setUser={setUser}/> : null }
         <Header cart={cart}/>
 
         <Routes>
           <Route path='/checkout' element= {Checkout}/>
           <Route path='/products/:id' element = {<SingleProduct products={products}/>} />
           <Route path='' element={<HomeBody />} />
-          <Route path='/login' element={<Login />} />
+          <Route path='/login' element={<Login setUser={setUser}/>} />
           <Route path='/register' element={<Register setUser ={setUser}/>} />
-          <Route path='/products' element={<Products products={products}/>} />
+          <Route path='/products' element={<Products products={products} setCart={setCart}/>} />
           <Route path='/cart' element={<Cart cart={cart}/>}/>
 
         </Routes>

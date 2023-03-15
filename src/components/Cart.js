@@ -7,7 +7,7 @@ function Cart({cart}) {
         <ul>
             {cart.products?.map((product) => {
                 return (
-                <li>
+                <li key={product.id}>
                     {product.name} ({product.quantity})
                     <button>Remove from Cart</button>
                 </li>

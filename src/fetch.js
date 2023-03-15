@@ -62,7 +62,7 @@ export const fetchLogin = async (username, password) => {
         const result = await response.json();
         let token = result.token;
         window.localStorage.setItem('token', token);
-        return token;
+        return result;
     } catch (error) {
         console.error('COULD NOT LOGIN USER');
     }
