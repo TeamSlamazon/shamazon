@@ -4529,7 +4529,7 @@ const Login = () => {
         if (!res.error) {
           window.localStorage.setItem('token', res);
           const redirHome = () => {
-            window.location.href = '/';
+            window.location.href = '/#/';
           };
           redirHome();
         }
@@ -4582,7 +4582,7 @@ const Logout = () => {
     className: "logout-container"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("button", {
     className: "logout-btn",
-    onClick: window.localStorage.removeItem('token')
+    onClick: ev => window.localStorage.removeItem('token')
   }, "Logout"));
 };
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (Logout);

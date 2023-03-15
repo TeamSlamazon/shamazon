@@ -7,6 +7,7 @@ const jwt = require("jsonwebtoken");
 
 const { tokenAuth, sliceToken } = require("./utils");
 const { createUser, getUserByUsername, authenticate, getUserByToken } = require("../db/users");
+const { createCart } = require("../db");
 
 
 
@@ -41,6 +42,7 @@ router.post("/register", async (req, res, next) => {
         } 
        
           const newUser = await createUser({username, password})
+          await createCart(newUser.id)
           const token = jwt.sign({id: newUser.id, username: newUser.username}, process.env.JWT_SECRET)
           res.send({
             newUser,
