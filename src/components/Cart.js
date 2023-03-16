@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 
 function Cart({cart}) {
   return (
@@ -14,6 +15,7 @@ function Cart({cart}) {
                 )
             })}
         </ul>
+          <Link to='/checkout'/>
     </div>
   )
 }
