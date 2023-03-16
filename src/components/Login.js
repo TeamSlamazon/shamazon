@@ -2,10 +2,11 @@ import React, { useState } from "react";
 
 import { Link } from 'react-router-dom';
 
-import { fetchLogin } from "../fetch";
+import { fetchLogin, getUser } from "../fetch";
 
 
-const Login = () => {
+const Login = ({setUser}) => {
+    
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('')
 
@@ -19,10 +20,13 @@ return (
                 ev.preventDefault();
                 const res = await fetchLogin(username, password);
                 console.log(res);
+                console.log(res.token)
+
                 if(!res.error) {
-                    window.localStorage.setItem('token', res.token);
+                    setUser(res.user)
+                    console.log(res.user)
                     const redirHome = () => {
-                        window.location.href ='/'
+                        window.location.href ='/#/'
                     }
                     redirHome();
                 }
@@ -41,7 +45,8 @@ return (
             <div>
                 <nav>
                     <Link to='/Register'>
-                        Dont have an account? Click here to Register!
+                        <p className="login-text">Dont have an account?</p>
+                        <p className="login-text">Click here to Register!</p>
                     </Link>
                 </nav>
             </div>

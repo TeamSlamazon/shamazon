@@ -1,3 +1,4 @@
+
 const express = require("express");
 const router = express.Router();
 
@@ -5,136 +6,99 @@ const jwt = require("jsonwebtoken");
 
 
 const { tokenAuth, sliceToken } = require("./utils");
-const { createUser, getUserByToken, getUserByUsername } = require("../db/users");
+const { createUser, getUserByUsername, authenticate, getUserByToken, getAllUsers } = require("../db/users");
+const { createCart } = require("../db");
+
+
 
 router.get('/health', async (req, res, next) => {
     res.send({ message: "Healthy Users Route." })
   });
 
+  router.get('/checkout', async (req, res, next) => {
+    res.send({ message: "Successfully placed your order!." })
+  });
+router.get('/', async (req, res) => {
+  try {
+  
+    const users = await getAllUsers()
+    res.send(users)
+  } catch (error) {
+    throw error
+  }
+})
+
+
 router.post("/register", async (req, res, next) => {
-    // eslint-disable-next-line no-undef
-    next(error);
+    
+    const {username, password} = req.body
+    console.log(req.body)
+
+
     try{
-        const {username, password } = req.body
         
         
-        const user = await createUser({ username, password })
+        const user = await getUserByUsername({username})
         
-        if (!user){
+        if (user){
             res.send({
                 error: "Username Taken",
                 message: `User ${username} is already taken.`,
                 name: "Username Taken"
             })
         }
-        if (password.length<8){
+        else if (password.length<8){
             res.send({
                 error: "Password Too Short!",
                 message: "Password Too Short!",
                 name: "Password Too Short!"
             })
-        }
-        const response = {
-            message: "Registered",
-            token: "TBD",
+        } 
+       
+          const newUser = await createUser({username, password})
+          await createCart(newUser.id)
+          const token = jwt.sign({id: newUser.id, username: newUser.username}, process.env.JWT_SECRET)
+          res.send({
+            newUser,
+            message: "Username has been registered succesfully",
+            token: token,
             user: {
-                id: user.id,
-                username: user.username
-            }
-        }
+              id: newUser.id,
+              username: newUser.username
+          }
+          })
+          
         
-        res.send(response)
-        
+      
     } catch (error) {
+      console.error(error);
     }
 });
 
-// Eric's Code
-
-// const {username, password} = req.body;
-// try {
-//     if (password.length <= 7) {
-//         res.send ({
-//            error: 'Short Password',
-//            message: 'Your password is too short!',
-//            name: username, 
-//            status: 400
-//         });
-//     }
-
-// const newUser = await createUser({username, password});
-// if (!newUser) {
-//     res.send ({
-//         error: 'Taken Username',
-//         message: `${username} is taken!`,
-//         name: username,
-//         status: 401
-//     });
-// } else {
-//     const {id} = newUser;
-//     const token = jwt.sign (
-//         {id: id, username},
-//         process.env.jwt
-//     );
-//     res.send({
-//         message: 'You have succefully registered!',
-//         token: token,
-//         user: {id:id, username:username}
-//     })
-// }
-
-router.post('/login', async(res, req, next) => {
+router.post('/login', async(req, res, next) => {
+  const {username, password} = req.body;
+  
+  try {
     const {username, password} = req.body;
-
-    if (!username || !password) {
-        next({
-            name: 'Missing Credentials Error',
-            message: 'User not found'
-        });
-    }
-
-    try {
-        const user = await getUserByToken({username, password});
-
-        if (username == username) {
-            const token = jwt.sign(
-              { id: user.id, username: user.username },
-              process.env.JWT_SECRET
-            );
-      
-            res.send({ 
-              message: "You're logged in!",
-              token: token,
-              user: user,
-          })
-          } else {
-            next ({
-              name: "Incorrect Credetials Error",
-              message: "Username or password is incorrect"
-            })
-          }
-    } catch (error) {
-        
-    }
+    const token = await authenticate({username, password});
+    const user = await getUserByToken(token)
+    res.send({ 
+      message: "You're logged in!",
+      token: token,
+      user
+    });
+  }
+  catch(ex){
+    console.log(ex);
+    next(ex);
+  }
 
 });
 
 router.get('/me', tokenAuth, async (req, res, next) => {
 
-    try{
-     const userInfo = sliceToken(req);
-    
-     const user = await getUserByUsername(userInfo.username)
-   
-     if (user) {
-       res.send({
-         id: user.id, 
-         username: user.username
-       });
-     }
-     else {
-         res.send('User unavailable');   
-     }
+  try{
+      res.send(await getUserByToken(req.headers.authorization.slice('Bearer '.length))); 
    } catch (error) {
      next(error);
    }

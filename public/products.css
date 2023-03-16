@@ -1,0 +1,47 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Trebuchet, sans-serif;
+    outline: none;
+    border: none;
+}
+
+.product {
+    padding: 10px;
+    display: flex;
+    box-shadow: 0 3px 10px rgb(0 0 0 / 0.135);
+}
+
+.image {
+    display: flex;
+    padding-left: 450px;
+    list-style: none;
+}
+
+.info {
+    display: flex;
+    flex-direction: column;
+    padding-left: 17.5px;
+    padding-top: 25px;
+}
+
+.info li {
+    list-style: none;
+}
+
+.info_sub1 li {
+    padding-top: 6px;
+}
+
+.name {
+    font-weight: bold;
+}
+
+.price {
+
+}
+
+.shipping {
+
+}

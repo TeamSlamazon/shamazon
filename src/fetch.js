@@ -1,8 +1,23 @@
 
 
+export const getUser = async (token) => {
+    try {
+        let response = await fetch('/api/users/me', {
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${token}`
+            },
+        });
+        let result = await response.json();
+        return result;
+    } catch (error) {
+        console.error(error);
+    }
+}
+
 export const fetchProducts = async () => {
     try {
-        const response = await fetch('localhost:3000/api/products', {
+        const response = await fetch('/api/products', {
             method: 'GET'
         })
         const result = await response.json();
@@ -14,10 +29,11 @@ export const fetchProducts = async () => {
 
 export const fetchRegister = async (username, password) => {
     try {
-        const response = await fetch('/api/register', {
+        const response = await fetch('/api/users/register', {
             method: 'POST',
             headers: {
-                'Content-Type': 'applications/json',
+                
+                'Content-Type': 'application/json',
             },
             body: JSON.stringify({
                 username: username,
@@ -33,10 +49,10 @@ export const fetchRegister = async (username, password) => {
 
 export const fetchLogin = async (username, password) => {
     try {
-        const response = await fetch('/api/login', {
+        const response = await fetch('/api/users/login', {
             method: 'POST',
             headers: {
-                'Content-Type': 'applications/json',
+                'Content-Type': 'application/json',
             },
             body: JSON.stringify({
                 username: username,
@@ -46,7 +62,7 @@ export const fetchLogin = async (username, password) => {
         const result = await response.json();
         let token = result.token;
         window.localStorage.setItem('token', token);
-        return token;
+        return result;
     } catch (error) {
         console.error('COULD NOT LOGIN USER');
     }
@@ -65,36 +81,45 @@ export const fetchCart = async (token, user_id) =>{
     })
     const result = await response.json();
     return result;
- } catch (error) {
+} catch (error) {
     console.log('Cannot find the cart')
     
- }   
+}   
 }
 
 export const fetchAllProducts = async () =>{
-        try {
-            const response = await fetch('localhost:3000/api/products', {
-                method: 'GET'
-            })
-            const result = await response.json();
-            return result;
-        } catch (error) {
-            console.log(error);
-        }
+    try {
+        const response = await fetch('/api/products', {
+            method: 'GET'
+        })
+        const result = await response.json();
+        return result;
+    } catch (error) {
+        console.log(error);
+    }
 }
 
-export const fetchSingleView = async (token, name, price, description) =>{
+export const fetchAllUsers = async () => {
+    try {
+        const response = await fetch('/api/users/', {
+            method: 'GET'
+        })
+        const result = await response.json();
+        console.log("fetch users",result)
+        return result
+    } catch (error) {
+        console.error("Could not get Users")
+    }
+}
+
+export const fetchSingleView = async (id) =>{
     try{
-        const response = await fetch('/api/:id',{
+
+        const response = await fetch(`/api/products/${id}`,{
+
             headers:{
                 'Content-Type': 'application/json',
-                Authorization: `Bearer ${token}`,
             },
-            body: JSON.stringify({
-                name: name,
-                price: price,
-                description: description,
-        })
         })
         const result = await response.json();
         return result;
@@ -104,5 +129,16 @@ export const fetchSingleView = async (token, name, price, description) =>{
     }
 }
 
-const login = fetchLogin('eric','torres')
-console.log(login)
+export const fetchAddProductToCart = async (productId) => {
+    const token = window.localStorage.getItem('token');
+    if (!token) return;
+    const response = await fetch(`/api/carts/${productId}`, {
+        method: "POST",
+        headers: { 
+            'Content-Type': "application/json",
+            Authorization: token,
+        },
+    });
+    const updatedCart = await response.json();
+    return updatedCart;   
+}

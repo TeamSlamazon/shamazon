@@ -51,11 +51,11 @@ const Footer = () => {
                                 <div className='title'>
                                     <li>Contact us</li>
                                 </div>
-                                <li>Phone: xxx-xxx-xxxx</li>
-                                <li>Emails: xxx.xxx@gmail.com</li>
+                                <li>Phone: 1-800-NOT-SCAM</li>
+                                <li>Emails: service@shamazon.com</li>
                                 <li>Chat with us</li>
                                 <li>24/7 customer service</li>
-                                <li>Address: xxx,xxx,xxx,xxx</li>
+                                <li>Address: 3000 N LocalHost Road</li>
                             </ol>
                         </div>
                     </div>
