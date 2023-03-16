@@ -15,16 +15,16 @@ const getUserByUsername = async (username) => {
   }
 }
 
-const createUser = async({ username, password }) => {
+const createUser = async({ username, password, admin = false }) => {
   const saltRounds = 15;
   try {
     const hashedPassword = await bcrypt.hash(password, saltRounds)
 
     const { rows: [user] } = await client.query(`
-    INSERT INTO users(username, password) 
-    VALUES($1, $2) 
-    RETURNING id, username;
-  `, [username, hashedPassword]);
+    INSERT INTO users(username, password, admin) 
+    VALUES($1, $2, $3) 
+    RETURNING id, username, admin;
+  `, [username, hashedPassword, admin]);
   
   return user;
 } catch (error) {
@@ -68,10 +68,19 @@ const authenticate = async({ username, password }) => {
   return jwt.sign({ id: response.rows[0].id, username: response.rows[0].username }, process.env.JWT_SECRET);
 }
 
+const getAllUsers = async () => {
+  const {rows} = await client.query(`
+  SELECT id, username
+  FROM USERS
+  `)
+  return rows
+}
+
 module.exports = {
   getUserByUsername,
   createUser,
   authenticate,
-  getUserByToken
+  getUserByToken,
+  getAllUsers
 };
 

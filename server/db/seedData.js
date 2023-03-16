@@ -37,7 +37,8 @@ async function createTables() {
       CREATE TABLE users(
         id SERIAL PRIMARY KEY,
         username VARCHAR(100) UNIQUE NOT NULL,
-        password VARCHAR(100) NOT NULL
+        password VARCHAR(100) NOT NULL,
+        admin BOOLEAN DEFAULT false
     );
     
       CREATE TABLE carts(
@@ -78,20 +79,22 @@ async function createTables() {
   async function createInitialUsers() {
     try {
         
-        const [moe, lucy, glam] = await Promise.all([
-          createUser({username: 'moe',password: 'moe_password'}),
-          createUser({ username: "sandra", password: "sandra123" }),
-          createUser({ username: "glamgal", password: "glamgal123" })
+        const [moe, lucy, glam, andy] = await Promise.all([
+          createUser({username: 'moe',password: 'moe_password', admin: false}),
+          createUser({ username: "sandra", password: "sandra123", admin: false }),
+          createUser({ username: "glamgal", password: "glamgal123", admin: false }),
+          createUser({username: "andy", password: "password", admin: true})
         ])
     
         console.log("Users created:")
         console.log([moe,lucy,glam])
         console.log("Finished creating users!")
 
-        const [moeCart, lucyCart, glamCart] = await Promise.all([
+        const [moeCart, lucyCart, glamCart, andyCart] = await Promise.all([
           createCart(moe.id ),
           createCart(lucy.id),
-          createCart(glam.id)
+          createCart(glam.id),
+          createCart(andy.id)
         ])
 
         console.log("created carts")
