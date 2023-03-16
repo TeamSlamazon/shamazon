@@ -45,7 +45,7 @@ const Header = (props) => {
                                 <Link to='/cart'>
                                 <div className='checkoutbtn'>
                                     <img src='/images/checkout.png' alt='checkoutbtn' width='30px' />
-                                    <li>Cart ({cart.products?.length})</li>
+                                    { cart.products?.length ? <li>Cart ({cart.products?.length})</li> : <li>Cart (0)</li>}
                                 </div>
                                 </Link>
                             </div>

@@ -81,22 +81,35 @@ export const fetchCart = async (token, user_id) =>{
     })
     const result = await response.json();
     return result;
- } catch (error) {
+} catch (error) {
     console.log('Cannot find the cart')
     
- }   
+}   
 }
 
 export const fetchAllProducts = async () =>{
-        try {
-            const response = await fetch('/api/products', {
-                method: 'GET'
-            })
-            const result = await response.json();
-            return result;
-        } catch (error) {
-            console.log(error);
-        }
+    try {
+        const response = await fetch('/api/products', {
+            method: 'GET'
+        })
+        const result = await response.json();
+        return result;
+    } catch (error) {
+        console.log(error);
+    }
+}
+
+export const fetchAllUsers = async () => {
+    try {
+        const response = await fetch('/api/users/', {
+            method: 'GET'
+        })
+        const result = await response.json();
+        console.log("fetch users",result)
+        return result
+    } catch (error) {
+        console.error("Could not get Users")
+    }
 }
 
 export const fetchSingleView = async (id) =>{
