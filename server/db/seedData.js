@@ -78,29 +78,27 @@ async function createTables() {
 
   async function createInitialUsers() {
     try {
-        
-        const [An, moe, lucy, glam, andy] = await Promise.all([
-          createUser({username: 'An',password: 'Annguyen123', admin: true}),
 
-
-        const [moe, lucy, glam, andy] = await Promise.all([
+        const [moe, lucy, glam, andy, An, jacob] = await Promise.all([
           createUser({username: 'moe',password: 'moe_password', admin: false}),
           createUser({ username: "sandra", password: "sandra123", admin: false }),
           createUser({ username: "glamgal", password: "glamgal123", admin: false }),
-          createUser({username: "andy", password: "password", admin: true})
-
+          createUser({username: "andy", password: "password", admin: true}),
+          createUser({username: "jacob", password: "password", admin: true}),
+          createUser({username: 'An', password: 'Annguyen123', admin: true})
         ])
     
         console.log("Users created:")
         console.log([moe,lucy,glam])
         console.log("Finished creating users!")
 
-        const [moeCart, lucyCart, glamCart, andyCart] = await Promise.all([
+        const [] = await Promise.all([
           createCart(An.id),
           createCart(moe.id ),
           createCart(lucy.id),
           createCart(glam.id),
-          createCart(andy.id)
+          createCart(andy.id),
+          createCart(jacob.id)
         ])
 
         console.log("created carts")
