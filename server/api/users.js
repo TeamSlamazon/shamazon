@@ -15,14 +15,19 @@ router.get('/health', async (req, res, next) => {
     res.send({ message: "Healthy Users Route." })
   });
 
+  router.get('/checkout', async (req, res, next) => {
+    res.send({ message: "Successfully placed your order!." })
+  });
 router.get('/', async (req, res) => {
   try {
+  
     const users = await getAllUsers()
     res.send(users)
   } catch (error) {
     throw error
   }
 })
+
 
 router.post("/register", async (req, res, next) => {
     
