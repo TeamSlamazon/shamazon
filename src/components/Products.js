@@ -1,17 +1,25 @@
 // import { fetchProducts } from "../fetch";
-import React from 'react';
+import React, {useState} from 'react';
 import {Link} from "react-router-dom"
 import { fetchAddProductToCart } from "../fetch"
 
-const Products = (props) => {
+const Products = ({products, setCart, searchTerm, setSearchTerm, fullSearch, setFullSearch}) => {
     
-    const products=props.products
-    const setCart=props.setCart
+
+
+    const productMatches = (product, text) => {
+        if (product.name.includes(text)) {
+            return true
+        }
+    }
+
+    const filteredProducts = products.filter(product => productMatches(product, fullSearch));
+    const productsToDisplay = fullSearch.length ? filteredProducts : products;
 
     return (
         <div>
         {
-            products.map(product => {
+            productsToDisplay.map(product => {
                 return (
                         <ul key={ product.id }>
                             <div className="product">
