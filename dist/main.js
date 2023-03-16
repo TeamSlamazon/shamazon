@@ -4058,6 +4058,8 @@ const App = () => {
   let [user, setUser] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)({});
   const [products, setProducts] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)([]);
   const [cart, setCart] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)({});
+  const [searchTerm, setSearchTerm] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)('');
+  const [fullSearch, setFullSearch] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)('');
   const ueFetchProducts = async () => {
     setProducts(await (0,_fetch__WEBPACK_IMPORTED_MODULE_3__.fetchProducts)());
   };
@@ -4069,19 +4071,24 @@ const App = () => {
       fetch(`/api/carts/${user.id}`).then(response => response.json()).then(cart => setCart(cart));
     }
   };
-  console.log("PRODUCTS: ", products);
-  console.log("CART: ", cart);
+
+  // console.log("PRODUCTS: ", products)
+  // console.log("CART: ", cart)
+
   (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(() => {
     checkToken();
     ueFetchProducts();
   }, []);
-  console.log(products);
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement((react__WEBPACK_IMPORTED_MODULE_0___default().Fragment), null, user.id ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_components_index__WEBPACK_IMPORTED_MODULE_1__.Logout, {
     setUser: setUser
   }) : null, user.admin ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_5__.Link, {
     to: "/admin"
   }, "Admin Dashboard") : null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_components_index__WEBPACK_IMPORTED_MODULE_1__.Header, {
-    cart: cart
+    cart: cart,
+    searchTerm: searchTerm,
+    setSearchTerm: setSearchTerm,
+    fullSearch: fullSearch,
+    setFullSearch: setFullSearch
   }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_6__.Routes, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_6__.Route, {
     path: "/checkout",
     element: _components_index__WEBPACK_IMPORTED_MODULE_1__.Checkout
@@ -4107,7 +4114,11 @@ const App = () => {
     path: "/products",
     element: /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_components_index__WEBPACK_IMPORTED_MODULE_1__.Products, {
       products: products,
-      setCart: setCart
+      setCart: setCart,
+      searchTerm: searchTerm,
+      setSearchTerm: setSearchTerm,
+      fullSearch: fullSearch,
+      setFullSearch: setFullSearch
     })
   }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_6__.Route, {
     path: "/cart",
@@ -4261,8 +4272,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/dist/index.js");
 
 
-const Header = props => {
-  const cart = props.cart;
+const Header = ({
+  cart,
+  searchTerm,
+  setSearchTerm,
+  fullSearch,
+  setFullSearch
+}) => {
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("header", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("nav", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
     className: "headerContainer"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
@@ -4287,9 +4303,12 @@ const Header = props => {
     className: "search"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("form", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("input", {
     type: "text",
-    placeholder: "Search"
+    placeholder: "Search",
+    value: searchTerm,
+    onChange: ev => setSearchTerm(ev.target.value)
   }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("button", {
-    type: "submit"
+    type: "submit",
+    onClick: ev => setFullSearch(searchTerm)
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("img", {
     src: "/images/search.png",
     alt: "searchbtn",
@@ -4660,10 +4679,22 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-const Products = props => {
-  const products = props.products;
-  const setCart = props.setCart;
-  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", null, products.map(product => {
+const Products = ({
+  products,
+  setCart,
+  searchTerm,
+  setSearchTerm,
+  fullSearch,
+  setFullSearch
+}) => {
+  const productMatches = (product, text) => {
+    if (product.name.includes(text)) {
+      return true;
+    }
+  };
+  const filteredProducts = products.filter(product => productMatches(product, fullSearch));
+  const productsToDisplay = fullSearch.length ? filteredProducts : products;
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", null, productsToDisplay.map(product => {
     return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("ul", {
       key: product.id
     }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {

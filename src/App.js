@@ -14,7 +14,8 @@ const App = () => {
 
   const [products, setProducts] = useState([]);
   const [cart, setCart] = useState({})
-
+  const [searchTerm, setSearchTerm] = useState('')
+  const [fullSearch, setFullSearch] = useState('')
 
   const ueFetchProducts = async () => {
     setProducts(await fetchProducts())
@@ -37,22 +38,22 @@ const App = () => {
 
 
 
-  console.log("PRODUCTS: ", products)
-  console.log("CART: ", cart)
+  // console.log("PRODUCTS: ", products)
+  // console.log("CART: ", cart)
 
   useEffect(()=>{
     checkToken();
     ueFetchProducts()
   }, [])
 
-  console.log(products)
+
   return (
     <div>
       <>
         
     { user.id ? <Logout setUser={setUser}/> : null }
     {user.admin ? <Link to="/admin">Admin Dashboard</Link> : null}
-        <Header cart={cart}/>
+        <Header cart={cart} searchTerm={searchTerm} setSearchTerm={setSearchTerm} fullSearch={fullSearch} setFullSearch={setFullSearch}/>
 
         <Routes>
           <Route path='/checkout' element= {Checkout}/>
@@ -60,7 +61,7 @@ const App = () => {
           <Route path='' element={<HomeBody />} />
           <Route path='/login' element={<Login setUser={setUser}/>} />
           <Route path='/register' element={<Register setUser ={setUser}/>} />
-          <Route path='/products' element={<Products products={products} setCart={setCart}/>} />
+          <Route path='/products' element={<Products products={products} setCart={setCart} searchTerm={searchTerm} setSearchTerm={setSearchTerm} fullSearch={fullSearch} setFullSearch={setFullSearch}/>} />
           <Route path='/cart' element={<Cart cart={cart}/>}/>
           <Route path='/admin' element={<Admin/>}/>
         </Routes>
