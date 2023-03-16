@@ -81,10 +81,14 @@ async function createTables() {
         
         const [An, moe, lucy, glam, andy] = await Promise.all([
           createUser({username: 'An',password: 'Annguyen123', admin: true}),
+
+
+        const [moe, lucy, glam, andy] = await Promise.all([
           createUser({username: 'moe',password: 'moe_password', admin: false}),
           createUser({ username: "sandra", password: "sandra123", admin: false }),
           createUser({ username: "glamgal", password: "glamgal123", admin: false }),
           createUser({username: "andy", password: "password", admin: true})
+
         ])
     
         console.log("Users created:")
