@@ -89,9 +89,9 @@ async function createTables() {
         console.log("Finished creating users!")
 
         const [moeCart, lucyCart, glamCart] = await Promise.all([
-          createCart({ user_id: moe.id }),
-          createCart({user_id: lucy.id}),
-          createCart({user_id:glam.id})
+          createCart(moe.id ),
+          createCart(lucy.id),
+          createCart(glam.id)
         ])
 
         console.log("created carts")

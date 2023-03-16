@@ -7,6 +7,7 @@ const jwt = require("jsonwebtoken");
 
 const { tokenAuth, sliceToken } = require("./utils");
 const { createUser, getUserByUsername, authenticate, getUserByToken } = require("../db/users");
+const { createCart } = require("../db");
 
 
 
@@ -41,6 +42,7 @@ router.post("/register", async (req, res, next) => {
         } 
        
           const newUser = await createUser({username, password})
+          await createCart(newUser.id)
           const token = jwt.sign({id: newUser.id, username: newUser.username}, process.env.JWT_SECRET)
           res.send({
             newUser,
@@ -62,57 +64,27 @@ router.post("/register", async (req, res, next) => {
 router.post('/login', async(req, res, next) => {
   const {username, password} = req.body;
   
-  if (!username || !password) {
-        next({ 
-            name: 'Missing Credentials Error',
-            message: 'User not found'
-        });
-      } else {
-
-        
-        try {
-          const {username, password} = req.body;
-          const token = await authenticate({username, password});
-    
-
-          if (token) {
-              res.send({ 
-                message: "You're logged in!",
-              token: token,
-              user: {
-                username: username
-              },
-            })
-          } else {
-            next ({
-              name: "Incorrect Credetials Error",
-              message: "Username or password is incorrect"
-            })
-          }
-        } catch (error) {
-          console.error(error)
-    }
-        
-    }
+  try {
+    const {username, password} = req.body;
+    const token = await authenticate({username, password});
+    const user = await getUserByToken(token)
+    res.send({ 
+      message: "You're logged in!",
+      token: token,
+      user
+    });
+  }
+  catch(ex){
+    console.log(ex);
+    next(ex);
+  }
 
 });
 
 router.get('/me', tokenAuth, async (req, res, next) => {
 
-    try{
-     const userInfo = sliceToken();
-    console.log(userInfo)
-     const user = await getUserByUsername(userInfo.username)
-   
-     if (user) { 
-       res.send({
-         id: user.id, 
-         username: user.username
-       });
-     }
-     else {
-         res.send('User unavailable');   
-     }
+  try{
+      res.send(await getUserByToken(req.headers.authorization.slice('Bearer '.length))); 
    } catch (error) {
      next(error);
    }
