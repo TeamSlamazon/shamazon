@@ -15,6 +15,10 @@ router.get('/health', async (req, res, next) => {
     res.send({ message: "Healthy Users Route." })
   });
 
+  router.get('/checkout', async (req, res, next) => {
+    res.send({ message: "Successfully placed your order!." })
+  });
+
 router.post("/register", async (req, res, next) => {
     
     const {username, password} = req.body

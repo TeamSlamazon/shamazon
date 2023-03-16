@@ -77,7 +77,7 @@ async function createTables() {
 
   async function createInitialUsers() {
     try {
-        
+          
         const [moe, lucy, glam] = await Promise.all([
           createUser({username: 'moe',password: 'moe_password'}),
           createUser({ username: "sandra", password: "sandra123" }),
