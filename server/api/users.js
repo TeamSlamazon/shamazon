@@ -6,7 +6,7 @@ const jwt = require("jsonwebtoken");
 
 
 const { tokenAuth, sliceToken } = require("./utils");
-const { createUser, getUserByUsername, authenticate, getUserByToken, getAllUsers } = require("../db/users");
+const { createUser, getUserByUsername, authenticate, getUserByToken, getAllUsers, deleteUser} = require("../db/users");
 const { createCart } = require("../db");
 
 
@@ -104,6 +104,21 @@ router.get('/me', tokenAuth, async (req, res, next) => {
    }
    
    })
+
+
+
+router.delete('/delete/:id', async (req, res) => {
+  const id = req.params
+  console.log("is id NaN after params", Number.isNaN(id))
+  try {
+    await deleteUser({id})
+    const users = await getAllUsers()
+
+    res.send(users)
+  } catch (error) {
+    console.error(error)
+  }
+})
 
    
 module.exports = router

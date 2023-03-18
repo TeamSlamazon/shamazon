@@ -142,3 +142,35 @@ export const fetchAddProductToCart = async (productId) => {
     const updatedCart = await response.json();
     return updatedCart;   
 }
+
+export const fetchDestroyProduct = async (cpId) => {
+    const token = window.localStorage.getItem('token');
+    if (!token) return;
+    const response = await fetch(`/api/carts/${cpId}`, {
+        method: "DELETE",
+        headers: { 
+            'Content-Type': "application/json",
+            Authorization: token,
+        },
+    })
+    const result = response.json()
+    return result
+}
+
+export const fetchDeleteUser = async (id) => {
+    const token = window.localStorage.getItem('token');
+    console.log(Number.isNaN(id))
+    if (!token) return;
+    const response = await fetch(`/api/users/delete/${id}`, {
+        method: "DELETE",
+        headers: { 
+            'Content-Type': "application/json",
+            Authorization: token,
+        },
+    })
+    console.log("response", response)
+    const result = await response.json()
+    console.log("result at fetchdel", result)
+    return result
+    
+}
