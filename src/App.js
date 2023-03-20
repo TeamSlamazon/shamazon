@@ -36,11 +36,6 @@ const App = () => {
   };
 
 
-
-
-  // console.log("PRODUCTS: ", products)
-  // console.log("CART: ", cart)
-
   useEffect(()=>{
     checkToken();
     ueFetchProducts()

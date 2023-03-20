@@ -17,7 +17,6 @@ return (
             try {
                 ev.preventDefault();
                 const res = await fetchRegister(username, password);
-                console.log(res);
                 const token = res.token
                 if(!res.error) {
                     window.localStorage.setItem('token', token);
