@@ -12,7 +12,7 @@ const Header = ({cart, searchTerm, setSearchTerm, fullSearch, setFullSearch}) =>
             <nav>
                 <div className='headerContainer'>
                     <div className='logo'>
-                    <Link to=''><img src='/images/fakeamazon.png' alt='logo' width='65px' /></Link>
+                    <Link to=''><img src='/images/shamazontransparent.png' alt='logo' width='65px' /></Link>
                     </div>
                     <div className='olContainer'>
                         <ol>
