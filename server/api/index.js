@@ -4,11 +4,6 @@ const router = express.Router();
 router.get('/health', async (req, res, next) => {
   res.send({ message: "Healthy server" })
 });
-
-router.get('/checkout', async (req, res, next) => {
-  res.send({ message: 'Ready for checkout' })
-});
-
 // ROUTER: /api/users
 const usersRouter = require('./users')
 router.use('/users', usersRouter)

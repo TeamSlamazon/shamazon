@@ -1,5 +1,6 @@
 const { UnauthorizedError } = require("../errors")
-const jwt = require("jsonwebtoken")
+const jwt = require("jsonwebtoken");
+const { getUserByToken } = require("../db");
 
 const tokenAuth = (req, res, next) => {
     const token = req.header('Authorization');
@@ -22,11 +23,22 @@ const sliceToken = (req) => {
     return userInfo;
 }
 
-const checkAdmin = (req, res, next) => {
-  
+const checkAdmin = async (req, res, next) => {
+  const token = req.header('Authorization');
+  const user = await getUserByToken(token)
+  if (user.admin) {
+    next()
+  } else {
+    res.status(401).send({
+      message: UnauthorizedError(),
+      error: 'Not Admin',
+      name: 'Not Admin'
+    })
+  }
 }
 
 module.exports = {
   tokenAuth,
   sliceToken,
+  checkAdmin,
 }
