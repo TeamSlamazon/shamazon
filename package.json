@@ -28,6 +28,7 @@
   },
   "scripts": {
     "build": "webpack",
-    "start:dev": "JWT_SECRET=foobar nodemon ./server/server.js --ignore dist/ --ignore src/ & webpack --watch --mode=development"
+    "start:dev": "JWT_SECRET=foobar nodemon ./server/server.js --ignore dist/ --ignore src/ & webpack --watch --mode=development",
+    "start": "node ./server/server.js"
   }
 }
