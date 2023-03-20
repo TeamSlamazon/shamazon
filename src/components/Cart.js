@@ -4,6 +4,7 @@ import { fetchDestroyProduct } from '../fetch'
 
 function Cart({cart, setCart}) {
 
+
   return (
     <div>
         <h2>My Cart:</h2>
@@ -22,7 +23,7 @@ function Cart({cart, setCart}) {
                 )
             })}
         </ul>
-          <Link to='/checkout'/>
+          <Link to='/checkout'>Checkout</Link>
     </div>
   )
 }

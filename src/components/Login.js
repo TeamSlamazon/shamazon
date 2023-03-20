@@ -11,7 +11,7 @@ const Login = ({setUser}) => {
     const [password, setPassword] = useState('')
 
 return (
-    <div>
+    <div className="login-container">
         
 
              <form onSubmit={ async (ev) =>  {
@@ -32,18 +32,16 @@ return (
             }
 
         }}>
-            <h1>Login To Your Account</h1>
-        <input placeholder='username' value={username} onChange= {(ev) => {setUsername(ev.target.value)}}/>
-        <input placeholder='password' value={password} onChange= {(ev) => {setPassword(ev.target.value)}}/>
+            <h1 className="loginheader">Login To Your Account</h1>
+        <input classname="logcontainer" placeholder='username' value={username} onChange= {(ev) => {setUsername(ev.target.value)}}/>
+        <input classname="logcontainer" placeholder='password' value={password} onChange= {(ev) => {setPassword(ev.target.value)}}/>
 
-                <button className="btn" disabled={!username || !password}>Login</button>
+                <button className="login-btn" disabled={!username || !password}>Login</button>
 
             </form>
             <div>
                 <nav>
-                    <Link to='/Register'>
-                        <p className="login-text">Dont have an account?</p>
-                        <p className="login-text">Click here to Register!</p>
+                    <Link to='/Register'> <p className="login-text" >Don't have and account? Click here to register!</p>
                     </Link>
                 </nav>
             </div>
