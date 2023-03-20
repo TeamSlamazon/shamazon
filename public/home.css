@@ -9,6 +9,11 @@
     border: none;
 }
 
+#root {
+    position: relative;
+    min-height: 100vh;
+}
+
 /* general div and header styling */
 
 header {
@@ -95,7 +100,7 @@ header {
 footer {
     background-color: rgb(79, 79, 94);
     color: white;
-    position: fixed;
+    position: absolute;
     bottom: 0;
     width: 100%;
 }
@@ -156,6 +161,7 @@ footer {
     width: 90%;
     height: 100%;
     margin: auto;
+    padding-bottom: 2.5rem;
 }
 
 .homeTitle {
