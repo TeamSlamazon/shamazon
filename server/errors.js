@@ -1,6 +1,4 @@
 module.exports = {
-  ActivityExistsError: (name) => `An activity with name ${name} already exists`,
-  ActivityNotFoundError: (id) => `Activity ${id} not found`,
   UnauthorizedError: () => "You must be logged in to perform this action",
   UnauthorizedUpdateError: (username, name) =>
     `User ${username} is not allowed to update ${name}`,
