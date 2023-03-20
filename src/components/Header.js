@@ -14,16 +14,6 @@ const Header = ({cart, searchTerm, setSearchTerm, fullSearch, setFullSearch}) =>
                     <div className='logo'>
                     <Link to=''><img src='/images/shamazontransparent.png' alt='logo' width='65px' /></Link>
                     </div>
-                    <div className='olContainer'>
-                        <ol>
-                            <div className='menu'>
-                                <div className='menubtn'>
-                                    <img src='/images/menu.png' alt='menubtn' width='30px' />
-                                    <li>Menu</li>
-                                </div>
-                            </div>
-                        </ol>
-                    </div>
                     <div className='search'>
                         <form>
                             <input type='text' placeholder='Search' value={searchTerm} onChange={ev => setSearchTerm(ev.target.value)}/>
