@@ -19,12 +19,9 @@ return (
             try {
                 ev.preventDefault();
                 const res = await fetchLogin(username, password);
-                console.log(res);
-                console.log(res.token)
 
                 if(!res.error) {
                     setUser(res.user)
-                    console.log(res.user)
                     const redirHome = () => {
                         window.location.href ='/#/'
                     }

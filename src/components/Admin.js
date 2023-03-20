@@ -23,12 +23,8 @@ function Admin() {
                         <li>{user.username}</li>
                         <button
                             onClick={async ()=>{
-                                console.log(user.id)
-                                console.log(Number.isNaN(user.id))
                                 const updatedUsers= await fetchDeleteUser(user.id)
-                                console.log(updatedUsers)
                                 setUsers(updatedUsers)
-                                console.log('user deleted')
                             }}
                         >Delete User</button>
                     </div>

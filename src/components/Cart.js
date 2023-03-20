@@ -4,7 +4,6 @@ import { fetchDestroyProduct } from '../fetch'
 
 function Cart({cart, setCart}) {
 
-    console.log(cart)
 
   return (
     <div>
@@ -17,10 +16,7 @@ function Cart({cart, setCart}) {
                     <button
                         onClick={async () => {
                             const updatedCart = await fetchDestroyProduct(product.id)
-                            console.log("ucart", updatedCart)
                             setCart(updatedCart)
-                            console.log('deleted item')
-                            console.log('new cart: ', cart)
                         }}
                     >Remove from Cart</button>
                 </li>
