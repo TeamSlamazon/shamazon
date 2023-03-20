@@ -50,9 +50,42 @@ const addProductToCart = async ({ cartId, productId}) => {
     `, [productId, cartId])
     return added
 }
+    const updateCart = async ({}) => {
+        try {
+                const setFields = Object.keys(fields).map(
+                (key, index) => `"${ key }"=$${ index + 1 }`
+                ).join(', ');
+
+                const {rows: cart} = await client.query(`
+                UPDATE carts
+                SET ${setFields}
+                WHERE id = ${id}
+                RETURNING *
+            `, Object.values(fields))
+            return cart
+            
+        } catch (error) {
+            
+        }
+    }
+
+    const deleteCart = async (id) => {
+        try {
+            const {rows} = await client.query(`
+            DELETE FROM cart_products
+            WHERE cart_id = ${id}
+            RETURNING *
+            `)
+            return rows;
+        } catch (error) {
+            console.error(error);
+        }
+      }
 
 module.exports = {
+    deleteCart,
     createCart,
+    updateCart,
     getCartByUserId,
     addProductToCart
 }

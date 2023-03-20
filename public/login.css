@@ -1,0 +1,30 @@
+.login-container {
+    text-align: center;
+    flex-direction: column;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.logcontainer>input {
+    display: flex;
+    justify-content: center;
+    height: 35px;
+    width: 100%;
+    border-color: black;
+}
+.login-text {
+    align-items: center;
+    justify-content: center;
+    display: flex;
+    text-decoration: none;
+    
+}
+.login-btn {
+    display: flex;
+}
+.loginheader {
+    display: flex;
+    text-align: center;
+    font-size: 300%;
+}

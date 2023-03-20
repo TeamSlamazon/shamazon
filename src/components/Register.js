@@ -6,12 +6,11 @@ import { Link } from 'react-router-dom';
 
 const Register = (props) => {
     const {setUser} = props;
-    const [message, setMessage] = useState('')
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('')
 
 return (
-    <div>
+    <div className="registerdiv">
         <form onSubmit={ async (ev) =>  {
             
             try {
@@ -35,20 +34,19 @@ return (
             throw error
         }
     }}>
-            <h1>Create Your Account!</h1>
-        <input placeholder='username' value={username} onChange= {(ev) => {setUsername(ev.target.value)}}/>
-        <input placeholder='password' value={password} onChange= {(ev) => {setPassword(ev.target.value)}}/>
+            <h1 className="registerheader">Create Your Account!</h1>
+        <input className="registerinput" placeholder='username' value={username} onChange= {(ev) => {setUsername(ev.target.value)}}/>
+        <input className="registerinput" placeholder='password' value={password} onChange= {(ev) => {setPassword(ev.target.value)}}/>
 
 
-                <button className="btn" disabled={!username || !password}>Create Account</button>
+                <button className="register-btn" disabled={!username || !password}>Create Account</button>
             </form>
             <div>
-                <nav>
+                <nav className="login-text">
                     <Link to='/Login'>
-                        Click here to login.
+                        Click here to login to your account!
                     </Link>
                 </nav>
-                {message.message && <p>{message.message}</p>}
             </div>
         </div>
     )
