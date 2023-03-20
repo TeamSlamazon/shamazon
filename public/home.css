@@ -9,6 +9,11 @@
     border: none;
 }
 
+#root {
+    position: relative;
+    min-height: 100vh;
+}
+
 /* general div and header styling */
 
 header {
@@ -138,6 +143,7 @@ footer {
     width: 90%;
     height: 100%;
     margin: auto;
+    padding-bottom: 2.5rem;
 }
 
 .homeTitle {
