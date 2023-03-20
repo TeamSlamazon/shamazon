@@ -8,9 +8,9 @@ const HomeBody = () => {
         <h2>Featured Categories</h2>
       </div>
       <div className='homeAll'>
-        <h5><Link to='/Products'>Show All</Link></h5>
+        <h5><Link className='linkbody' to='/Products'>Show All</Link></h5>
       </div>
-      <Link to='/Products'>
+      <Link className='linkbody' to='/Products'>
       <div className='click'>
         <div>
           <div className='categorieContainer'>
