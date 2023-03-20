@@ -1,6 +1,6 @@
 
 import React, {useState, useEffect} from 'react';
-import { Login, Register, Products, Header, Footer, Logout, Checkout, Cart, Admin } from './components/index'
+import { Login, Register, Products, Header, Footer, Logout, Checkout, Cart, Admin, Thankyou } from './components/index'
 import { Routes, Route, Link } from 'react-router-dom';
 import HomeBody from './components/HomeBody';
 import { fetchProducts } from './fetch';
@@ -56,7 +56,8 @@ const App = () => {
         <Header cart={cart} searchTerm={searchTerm} setSearchTerm={setSearchTerm} fullSearch={fullSearch} setFullSearch={setFullSearch}/>
 
         <Routes>
-          <Route path='/checkout' element= {Checkout}/>
+          <Route path='/checkout' element= {<Checkout />}/>
+          <Route path='/thankyou' element={<Thankyou />}/>
           <Route path='/products/:id' element = {<SingleProduct products={products}/>} />
           <Route path='' element={<HomeBody />} />
           <Route path='/login' element={<Login setUser={setUser}/>} />

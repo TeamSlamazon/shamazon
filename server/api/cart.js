@@ -1,6 +1,6 @@
 const express = require('express')
 const cartsRouter = express.Router()
-const {getCartByUserId, getUserByToken, addProductToCart} = require('../db')
+const {getCartByUserId, getUserByToken, addProductToCart, deleteCart} = require('../db')
 
 cartsRouter.get('/health', async (req, res, next) => {
     res.send({ message: "Healthy Carts Route." })
@@ -26,6 +26,17 @@ cartsRouter.post("/:productId", async (req, res) =>{
     const updatedCart = await getCartByUserId({ userId: user.id });
     console.log("updatedCart line 27:", updatedCart)
     res.send(updatedCart);
+})
+
+cartsRouter.delete("/delete/:id", async (req, res) => {
+    const id = req.params;
+    try {
+        await deleteCart(id);
+
+        res.send("Cart cleared")
+    } catch (error) {
+     next(error)   
+    }
 })
 
 

@@ -142,3 +142,20 @@ export const fetchAddProductToCart = async (productId) => {
     const updatedCart = await response.json();
     return updatedCart;   
 }
+export const deleteCart = async (id) => {
+    const token = window.localStorage.getItem("token")
+    try {
+        let response = await fetch(`/api/carts/delete/:${id}`, {
+            method: "DELETE",
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${token}`
+            }
+        })
+        let result = await response.json();
+        return result;
+    } catch (error) {
+        console.log(error);
+        console.error("Error deleting cart");
+    }
+}

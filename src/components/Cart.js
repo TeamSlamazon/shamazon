@@ -1,7 +1,9 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 
+
 function Cart({cart}) {
+  
   return (
     <div>
         <h2>My Cart:</h2>
@@ -15,7 +17,7 @@ function Cart({cart}) {
                 )
             })}
         </ul>
-          <Link to='/checkout'/>
+          <Link to='/checkout'>Checkout</Link>
     </div>
   )
 }
