@@ -62,8 +62,8 @@ const App = () => {
           <Route path='' element={<HomeBody />} />
           <Route path='/login' element={<Login setUser={setUser}/>} />
           <Route path='/register' element={<Register setUser ={setUser}/>} />
-          <Route path='/products' element={<Products products={products} setCart={setCart} searchTerm={searchTerm} setSearchTerm={setSearchTerm} fullSearch={fullSearch} setFullSearch={setFullSearch}/>} />
-          <Route path='/cart' element={<Cart cart={cart}/>}/>
+          <Route path='/products' element={<Products products={products} user={user} setCart={setCart} searchTerm={searchTerm} setSearchTerm={setSearchTerm} fullSearch={fullSearch} setFullSearch={setFullSearch}/>} />
+          <Route path='/cart' element={<Cart cart={cart} setCart={setCart}/>}/>
           <Route path='/admin' element={<Admin/>}/>
         </Routes>
         <Footer />

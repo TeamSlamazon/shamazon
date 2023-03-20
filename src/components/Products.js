@@ -3,7 +3,7 @@ import React, {useState} from 'react';
 import {Link} from "react-router-dom"
 import { fetchAddProductToCart } from "../fetch"
 
-const Products = ({products, setCart, searchTerm, setSearchTerm, fullSearch, setFullSearch}) => {
+const Products = ({products, setCart, searchTerm, setSearchTerm, fullSearch, setFullSearch, user}) => {
     
 
 
@@ -35,6 +35,7 @@ const Products = ({products, setCart, searchTerm, setSearchTerm, fullSearch, set
                                         <li className='shipping'>Shipping Details: {product.shipping}</li>
                                     </div>
                                 </div>
+                                { user.id ?
                                 <button
                                     onClick={async () => {
                                         const updatedCart = await fetchAddProductToCart(product.id)
@@ -43,7 +44,8 @@ const Products = ({products, setCart, searchTerm, setSearchTerm, fullSearch, set
                                     }}
                                 >
                                     Add to Cart
-                                </button>
+                                </button> : null
+                                }
                             </div>
                         </ul>
                 )
