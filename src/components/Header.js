@@ -3,9 +3,8 @@ import React from 'react'
 import { Link } from 'react-router-dom';
 
 
-const Header = (props) => {
+const Header = ({cart, searchTerm, setSearchTerm, fullSearch, setFullSearch}) => {
 
-    const cart = props.cart
 
     return (
 
@@ -27,8 +26,8 @@ const Header = (props) => {
                     </div>
                     <div className='search'>
                         <form>
-                            <input type='text' placeholder='Search' />
-                            <button type='submit'><img src='/images/search.png' alt='searchbtn' width='25px' /></button>
+                            <input type='text' placeholder='Search' value={searchTerm} onChange={ev => setSearchTerm(ev.target.value)}/>
+                            <button type='submit' onClick={ ev =>  setFullSearch(searchTerm) }><img src='/images/search.png' alt='searchbtn' width='25px' /></button>
                         </form>
                     </div>
                     <div className='olContainer'>

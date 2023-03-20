@@ -1,19 +1,27 @@
 // import { fetchProducts } from "../fetch";
 import React from 'react';
-import { Link } from "react-router-dom"
+import {Link} from "react-router-dom"
 import { fetchAddProductToCart } from "../fetch"
 
-const Products = (props) => {
+const Products = ({products, setCart, searchTerm, setSearchTerm, fullSearch, setFullSearch, user}) => {
+    
 
-    const products = props.products
-    const setCart = props.setCart
+
+    const productMatches = (product, text) => {
+        if (product.name.includes(text)) {
+            return true
+        }
+    }
+
+    const filteredProducts = products.filter(product => productMatches(product, fullSearch));
+    const productsToDisplay = fullSearch.length ? filteredProducts : products;
 
     return (
         <div>
-            {
-                products.map(product => {
-                    return (
-                        <ul key={product.id}>
+        {
+            products.map(product => {
+                return (
+                        <ul key={ product.id }>
                             <div className="product">
                                 <div className="image">
                                     <li key={product.id}><img src={product.picture} alt="product_image" width='225px' height='275px' /></li>
@@ -34,6 +42,17 @@ const Products = (props) => {
                                         </button>
                                     </div>
                                 </div>
+                                { user.id ?
+                                <button
+                                    onClick={async () => {
+                                        const updatedCart = await fetchAddProductToCart(product.id)
+                                        setCart(updatedCart)
+                                        console.log('added to cart')
+                                    }}
+                                >
+                                    Add to Cart
+                                </button> : null
+                                }
                             </div>
                         </ul>
                     )

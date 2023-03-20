@@ -79,21 +79,22 @@ async function createTables() {
   async function createInitialUsers() {
     try {
 
-        const [moe, lucy, glam, andy, An, jacob] = await Promise.all([
+        console.log("Creating users...")
+        const [an, moe, lucy, glam, andy, eric] = await Promise.all([
+
           createUser({username: 'moe',password: 'moe_password', admin: false}),
           createUser({ username: "sandra", password: "sandra123", admin: false }),
           createUser({ username: "glamgal", password: "glamgal123", admin: false }),
+          createUser({username: "an", password: "anpassword", admin:true}),
           createUser({username: "andy", password: "password", admin: true}),
           createUser({username: "jacob", password: "password", admin: true}),
           createUser({username: 'An', password: 'Annguyen123', admin: true})
         ])
-    
-        console.log("Users created:")
-        console.log([moe,lucy,glam])
+
         console.log("Finished creating users!")
 
-        const [moeCart, lucyCart, glamCart, andyCart] = await Promise.all([
-          createCart(An.id),
+        const [moeCart, lucyCart, glamCart, andyCart, ericCart] = await Promise.all([
+          createCart(an.id),
           createCart(moe.id ),
           createCart(lucy.id),
           createCart(glam.id),
@@ -177,13 +178,7 @@ async function createTables() {
     }
   }
 
-  async function createInitialCarts () {
-    try {
-      
-    } catch (error) {
-      
-    }
-  }
+
 
   async function rebuildDB() {
     try {

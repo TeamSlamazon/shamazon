@@ -76,11 +76,26 @@ const getAllUsers = async () => {
   return rows
 }
 
+const deleteUser = async ({id}) => {
+  
+  await client.query(`
+  DELETE FROM carts
+  WHERE user_id = $1
+  `, [id.id])
+
+  const {rows} = await client.query(`
+  DELETE FROM users
+  WHERE id = $1
+  `, [id.id])
+  return rows
+}
+
 module.exports = {
   getUserByUsername,
   createUser,
   authenticate,
   getUserByToken,
-  getAllUsers
+  getAllUsers,
+  deleteUser
 };
 
