@@ -95,7 +95,9 @@ header {
 footer {
     background-color: rgb(79, 79, 94);
     color: white;
-    height: 280px;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
 }
 
 .footerContainer {
