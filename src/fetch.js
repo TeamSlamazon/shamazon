@@ -23,7 +23,7 @@ export const fetchProducts = async () => {
         const result = await response.json();
         return result;
     } catch (error) {
-        console.log(error);
+        console.error(error);
     }
 }
 
@@ -105,7 +105,6 @@ export const fetchAllUsers = async () => {
             method: 'GET'
         })
         const result = await response.json();
-        console.log("fetch users",result)
         return result
     } catch (error) {
         console.error("Could not get Users")
@@ -159,7 +158,6 @@ export const fetchDestroyProduct = async (cpId) => {
 
 export const fetchDeleteUser = async (id) => {
     const token = window.localStorage.getItem('token');
-    console.log(Number.isNaN(id))
     if (!token) return;
     const response = await fetch(`/api/users/delete/${id}`, {
         method: "DELETE",
@@ -168,9 +166,7 @@ export const fetchDeleteUser = async (id) => {
             Authorization: token,
         },
     })
-    console.log("response", response)
     const result = await response.json()
-    console.log("result at fetchdel", result)
     return result
     
 }

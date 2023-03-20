@@ -47,7 +47,7 @@ const Products = ({products, setCart, searchTerm, setSearchTerm, fullSearch, set
                                     onClick={async () => {
                                         const updatedCart = await fetchAddProductToCart(product.id)
                                         setCart(updatedCart)
-                                        console.log('added to cart')
+                                        
                                     }}
                                 >
                                     Add to Cart
