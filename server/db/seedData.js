@@ -87,7 +87,8 @@ async function createTables() {
           createUser({ username: "glamgal", password: "glamgal123", admin: false }),
           createUser({username: "an", password: "anpassword", admin:true}),
           createUser({username: "andy", password: "password", admin: true}),
-          createUser({username: "eric", password: "password", admin: true})
+          createUser({username: "jacob", password: "password", admin: true}),
+          createUser({username: 'An', password: 'Annguyen123', admin: true})
         ])
 
         console.log("Finished creating users!")
@@ -97,8 +98,7 @@ async function createTables() {
           createCart(moe.id ),
           createCart(lucy.id),
           createCart(glam.id),
-          createCart(andy.id),
-          createCart(eric.id)
+          createCart(andy.id)
         ])
 
         console.log("created carts")

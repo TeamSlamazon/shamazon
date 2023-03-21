@@ -4,11 +4,6 @@ const Footer = () => {
     return (
         <div className='footer'>
             <footer>
-                <div className='footerTopContainer'>
-                    <div className='topBtn'>
-                        <li>Back to top</li>
-                    </div>
-                </div>
                 <nav>
                     <div className='footerContainer'>
                         <div className='footerRow'>

@@ -1,9 +1,13 @@
 .login-container {
-    text-align: center;
-    flex-direction: column;
+    height: 100vh;
+}
+
+.login-box {
     display: flex;
-    align-items: center;
     justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding-top: 125px;
 }
 
 .logcontainer>input {
@@ -20,11 +24,22 @@
     text-decoration: none;
     
 }
-.login-btn {
-    display: flex;
-}
+
 .loginheader {
     display: flex;
     text-align: center;
     font-size: 300%;
+}
+
+.logininfo {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    flex-direction: column;
+}
+
+.logininfo input, button {
+    width: 75px;
+    border: 1px solid black;
 }

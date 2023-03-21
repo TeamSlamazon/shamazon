@@ -12,17 +12,7 @@ const Header = ({cart, searchTerm, setSearchTerm, fullSearch, setFullSearch}) =>
             <nav>
                 <div className='headerContainer'>
                     <div className='logo'>
-                    <Link to=''><img src='/images/shamazontransparent.png' alt='logo' width='65px' /></Link>
-                    </div>
-                    <div className='olContainer'>
-                        <ol>
-                            <div className='menu'>
-                                <div className='menubtn'>
-                                    <img src='/images/menu.png' alt='menubtn' width='30px' />
-                                    <li>Menu</li>
-                                </div>
-                            </div>
-                        </ol>
+                    <Link className='linklink' to=''><img src='/images/shamazontransparent.png' alt='logo' width='65px' /></Link>
                     </div>
                     <div className='search'>
                         <form>
@@ -36,12 +26,12 @@ const Header = ({cart, searchTerm, setSearchTerm, fullSearch, setFullSearch}) =>
                                 <div className='profilebtn'>
                                     <img src='/images/profile.png' alt='profilebtn' width='30px' />
 
-                                    <li><Link to='/Login'>Profile</Link></li>
+                                    <li><Link className='linkheader' to='/Login'>Profile</Link></li>
 
                                 </div>
                             </div>
                             <div className='checkout'>
-                                <Link to='/cart'>
+                                <Link className='linkheader' to='/cart'>
                                 <div className='checkoutbtn'>
                                     <img src='/images/checkout.png' alt='checkoutbtn' width='30px' />
                                     { cart.products?.length ? <li>Cart ({cart.products?.length})</li> : <li>Cart (0)</li>}
