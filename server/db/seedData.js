@@ -92,14 +92,14 @@ async function createTables() {
 
         console.log("Finished creating users!")
 
-        const [moeCart, lucyCart, glamCart, andyCart, ericCart] = await Promise.all([
+        
           createCart(an.id),
           createCart(moe.id ),
           createCart(lucy.id),
           createCart(glam.id),
           createCart(andy.id),
           createCart(eric.id)
-        ])
+        
 
         console.log("created carts")
       } catch (error) {
@@ -166,11 +166,6 @@ async function createTables() {
            {name: 'Posh Paws Large Pet Sotrage Bin',price: '15',description: 'Perfect Canvas Bin for Cat or Dog Toys', shipping: 'free shipping', weight: '10', picture: 'https://m.media-amazon.com/images/I/71GmJ29EwaL._AC_UY327_FMwebp_QL65_.jpg'},
            {name: 'MidWest Homes For Pets',price: '26',description: 'Spree Hard-Sided Pet Carrier', shipping: 'free shipping', weight: '9', picture: 'https://m.media-amazon.com/images/I/91MZDNLc9CL._AC_UY327_FMwebp_QL65_.jpg'},
         ]
-        const products = await Promise.all(productsToCreate.map(createProduct))
-
-        console.log("products created:")
-        
-
         console.log("Finished creating products.")
     } catch (error) {
         console.log("error creating products")
